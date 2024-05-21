@@ -1,42 +1,55 @@
-// const yargs = require("yargs");
-// const { hideBin } = require("yargs/helpers");
+const express = require("express");
+const moment = require("moment");
+const fs = require("fs/promises");
+const cors = require("cors");
 
-const { program } = require("commander");
+const booksRouter = require("./routes/api/books");
 
-const books = require("./books");
+const app = express();
 
-const invokeAction = async ({ action, id, title, author }) => {
-  switch (action) {
-    case "read":
-      const allBooks = await books.getAll();
-      return console.log(allBooks);
-    case "getById":
-      const oneBook = await books.getById(id);
-      return console.log(oneBook);
-    case "add":
-      const newBook = await books.addBook({ title, author });
-      console.log(newBook);
-    case "updateById":
-      const updateBook = await books.updateById(id, { author, title });
-      return console.log(updateBook);
-    case "deleteById":
-      const deleteBook = await books.deleteById(id);
-      console.log(deleteBook);
-    default:
-      return console.log("Unknow action");
-  }
-};
+app.use(cors());
 
-// const arr = hideBin(process.argv);
-// const { argv } = yargs(arr);
-// invokeAction(argv);
-program
-  .option("-a, --action, <type>")
-  .option("-i, --id, <type>")
-  .option("-t, --title, <type>")
-  .option("-at, --author, <type>");
+app.use("/api/books", booksRouter);
 
-program.parse();
+// const corsMiddleware = cors();
 
-const options = program.opts();
-invokeAction(options);
+// app.use(corsMiddleware);
+// app.use(async (res, req, next) => {
+//   const { method, url } = req;
+//   const date = moment().format("DD-MM-YYYY_hh:mm:ss");
+//   await fs.appendFile("./public/server.log", `\n ${method} ${url} ${date}`);
+//   next();
+// });
+
+// app.use((res, req, next) => {
+//   console.log("First middleware");
+//   next();
+// });
+
+//   .app.get("/products", async (req, res) => {
+//     res.json([]);
+//     // res.send(books);
+//   });
+
+// app.get("/books", async (req, res) => {
+//   res.json(books);
+//   // res.send(books);
+// });
+
+// app.get("/", (request, response) => {
+//   response.send("<h2>Hello it is home page</h2>");
+// });
+
+// app.get("/contacts", (request, response) => {
+//   console.log(request.url);
+//   console.log(request.method);
+//   response.send("<h2>Hello it is contact page</h2>");
+// });
+
+app.use((req, res) => {
+  res.status(404).json({
+    message: "Not found",
+  });
+});
+
+module.exports = app;
