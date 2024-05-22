@@ -2,20 +2,20 @@ const express = require("express");
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-  res.json([]);
-});
+const ctrl = require("../../controllers/points");
 
-router.post("/", (req, res) => {
-  res.json([]);
-});
+const { validateBody } = require("../../middlewares");
 
-router.put("/", (req, res) => {
-  res.json([]);
-});
+const schema = require("../../schemas/points");
 
-router.delete("/:id", (req, res) => {
-  res.json([]);
-});
+router.get("/", ctrl.getAllPoints);
+
+router.get("/:id", ctrl.getPointsById);
+
+router.post("/", validateBody(schema.addSchema), ctrl.addPoint);
+
+router.put("/:id", validateBody(schema.addSchema), ctrl.editPoint);
+
+router.delete("/:id", ctrl.deletePoint);
 
 module.exports = router;
