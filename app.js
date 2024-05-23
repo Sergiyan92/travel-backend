@@ -2,8 +2,6 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 
-const booksRouter = require("./routes/api/books");
-
 const pointsRouter = require("./routes/api/points");
 
 const usersRouter = require("./routes/api/users");
@@ -12,8 +10,6 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-
-app.use("/api/books", booksRouter);
 
 app.use("/api/points", pointsRouter);
 
