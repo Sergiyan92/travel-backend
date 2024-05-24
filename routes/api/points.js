@@ -4,18 +4,23 @@ const router = express.Router();
 
 const ctrl = require("../../controllers/points");
 
-const { validateBody } = require("../../middlewares");
+const { validateBody, authenticate } = require("../../middlewares");
 
 const schema = require("../../schemas/points");
 
-router.get("/", ctrl.getAllPoints);
+router.get("/", authenticate, ctrl.getAllPoints);
 
 router.get("/:id", ctrl.getPointsById);
 
-router.post("/", validateBody(schema.addSchema), ctrl.addPoint);
+router.post("/", authenticate, validateBody(schema.addSchema), ctrl.addPoint);
 
-router.put("/:id", validateBody(schema.addSchema), ctrl.editPoint);
+router.put(
+  "/:id",
+  authenticate,
+  validateBody(schema.addSchema),
+  ctrl.editPoint
+);
 
-router.delete("/:id", ctrl.deletePoint);
+router.delete("/:id", authenticate, ctrl.deletePoint);
 
 module.exports = router;

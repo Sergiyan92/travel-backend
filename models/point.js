@@ -10,6 +10,11 @@ const pointSchema = new Schema(
     description: String,
     img: String,
     coordinates: String,
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      required: true,
+    },
   },
   { versionKey: false, timestamps: true }
 );

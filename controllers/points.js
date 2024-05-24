@@ -3,7 +3,8 @@ const Point = require("../models/point");
 const { HttpError, ctrlWrapper } = require("../helpers");
 
 const getAllPoints = async (req, res) => {
-  const result = await Point.find();
+  const { _id: owner } = req.user;
+  const result = await Point.find({ owner }).populate("owner", "name email");
   res.json(result);
 };
 
@@ -18,7 +19,8 @@ const getPointsById = async (req, res) => {
 };
 
 const addPoint = async (req, res) => {
-  const result = await Point.create(req.body);
+  const { _id: owner } = req.user;
+  const result = await Point.create({ ...req.body, owner });
   res.status(201).json(result);
 };
 
