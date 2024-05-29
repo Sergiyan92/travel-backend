@@ -7,9 +7,8 @@ const pointSchema = new Schema(
       type: String,
       required: true,
     },
-    description: String,
-    img: String,
-    coordinates: String,
+    descr: String,
+    coordinates: Array,
     owner: {
       type: Schema.Types.ObjectId,
       ref: "user",
