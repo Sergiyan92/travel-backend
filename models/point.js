@@ -8,6 +8,10 @@ const pointSchema = new Schema(
       required: true,
     },
     descr: String,
+    img: {
+      type: String,
+      default: null,
+    },
     coordinates: Array,
     owner: {
       type: Schema.Types.ObjectId,

@@ -1,7 +1,7 @@
 const Joi = require("joi");
 
 const addSchema = Joi.object({
-  title: Joi.string().required(),
+  title: Joi.string(),
   descr: Joi.string(),
   img: Joi.string(),
   coordinates: Joi.array(),

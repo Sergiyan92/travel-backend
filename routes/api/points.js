@@ -17,7 +17,7 @@ router.post("/", authenticate, validateBody(schema.addSchema), ctrl.addPoint);
 router.put(
   "/:id",
   authenticate,
-  validateBody(schema.addSchema),
+
   ctrl.editPoint
 );
 
