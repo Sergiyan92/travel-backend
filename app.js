@@ -4,8 +4,6 @@ require("dotenv").config();
 
 const pointsRouter = require("./routes/api/points");
 
-const usersRouter = require("./routes/api/users");
-
 const authRouter = require("./routes/api/auth");
 
 const app = express();
@@ -15,8 +13,6 @@ app.use(express.json());
 app.use(express.static("public"));
 
 app.use("/api/points", pointsRouter);
-
-app.use("/api/users", usersRouter);
 
 app.use("/api/auth", authRouter);
 
