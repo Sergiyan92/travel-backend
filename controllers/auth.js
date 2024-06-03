@@ -71,11 +71,12 @@ const login = async (req, res) => {
 };
 
 const refresh = async (req, res) => {
-  const { email, name } = req.user;
+  const { email, name, avatarUrl } = req.user;
 
   res.json({
     email,
     name,
+    avatarUrl,
   });
 };
 
@@ -94,7 +95,7 @@ const updateAvatar = async (req, res) => {
   const filename = `${_id}_${originalname}`;
   const resultUpload = path.join(avatarDir, filename);
   await fs.rename(tempUpload, resultUpload);
-  const avatarUrl = path.join("point", filename);
+  const avatarUrl = `/point/${filename}`;
   await User.findByIdAndUpdate(_id, { avatarUrl });
 
   res.json({
