@@ -71,7 +71,7 @@ const login = async (req, res) => {
 };
 
 const refresh = async (req, res) => {
-  const { email, name, avatarUrl } = req.user;
+  const { email, name, avatarUrl, token } = req.user;
 
   res.json({
     email,
