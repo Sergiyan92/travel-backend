@@ -77,6 +77,7 @@ const refresh = async (req, res) => {
     email,
     name,
     avatarUrl,
+    token,
   });
 };
 
