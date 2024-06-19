@@ -1,4 +1,5 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 const cors = require("cors");
 require("dotenv").config();
 
@@ -8,6 +9,7 @@ const authRouter = require("./routes/api/auth");
 
 const app = express();
 
+app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
