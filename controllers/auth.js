@@ -96,7 +96,7 @@ const updateAvatar = async (req, res) => {
   const filename = `${_id}_${originalname}`;
   const resultUpload = path.join(avatarDir, filename);
   await fs.rename(tempUpload, resultUpload);
-  const avatarUrl = `/point/${filename}`;
+  const avatarUrl = `https://travel-backend-3glj.onrender.com/point/${filename}`;
   await User.findByIdAndUpdate(_id, { avatarUrl });
 
   res.json({
